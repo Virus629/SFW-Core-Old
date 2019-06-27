@@ -2,7 +2,7 @@
 
 ##TODO:
 - [X] Dataa menee databaseen
-- [] Käännös järjestelmä i18n?
-- [] Raha homma
-- [] Admin toolit
-- [] Utils. 3D text, progressbar, notification yms.
+- [ ] Käännös järjestelmä i18n?
+- [ ] Raha homma
+- [ ] Admin toolit
+- [ ] Utils. 3D text, progressbar, notification yms.
