@@ -1,0 +1,3 @@
+settings = {
+    useDebug = true
+}
