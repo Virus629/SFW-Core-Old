@@ -28,18 +28,16 @@ end)
 
 RegisterCommand('save', function(source)
     local src = source
-    ids = GetPlayerIdentifiers(src)
+    local steamID = GetPlayerIdentifiers(src)[1] --Taken from esx
+    local license = GetPlayerIdentifiers(src)[2] 
+    local playerName = GetPlayerName(src)
 
     MySQL.Async.execute('INSERT INTO users (`id`, `license`, `username`) VALUES (@id, @license, @username)',
     {
-        ['@id'] = identifier,
+        ['@id'] = steamID,
         ['@license'] = license,
         ['@username'] = playerName
     }, function(rowsChanged)
         FRBS.Debug(rowsChanged)
     end)
-    
-    for i in ipairs(ids) do
-        FRBS.Debug(tostring(ids[i]))
-    end
 end)
