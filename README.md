@@ -14,9 +14,9 @@
  `resource_type 'map' { gameTypes = { fivem = true } }` ==> `resource_type 'map' { gameTypes = { Base = true } }`
 
 ### Miten saan mysql-asyncin ja locale järjestelmän toimimaan omassa scriptissä:
- <h3>MySQL</h3>
- 1. MYSQL: Lisää `'@mysql-async/lib/MySQL.lua'` omaan \_\_resource.lua tiedostoon server sideen ensinmäiseksi
- <h3>Locale</h3>
- 1. Locale: Lisää `'@Spectrum_Core\locale.lua'` omaan \_\_resource.lua tiedostoon server ja/tai client sideen ennen `fi.lua (tai joku muu kieli)` tiedostoja
- 2. lisää `config.lua` tiedostoon `Settings.Locale = 'fi' (tai joku muu kieli)`
+ <h5>MySQL</h5>
+  1. MYSQL: Lisää `'@mysql-async/lib/MySQL.lua'` omaan \_\_resource.lua tiedostoon server sideen ensinmäiseksi
+ <h5>Locale</h5>
+  2. Locale: Lisää `'@Spectrum_Core\locale.lua'` omaan \_\_resource.lua tiedostoon server ja/tai client sideen ennen `fi.lua (tai joku muu kieli)` tiedostoja
+  3. Lisää `config.lua` tiedostoon `Settings.Locale = 'fi' (tai joku muu kieli)`
  
