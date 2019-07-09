@@ -13,10 +13,10 @@
  3. Mene fivem-map-skater ja fivem-map-hipster \_\_resource.lua tiedostoon ja muokkaa rivi: 
  `resource_type 'map' { gameTypes = { fivem = true } }` ==> `resource_type 'map' { gameTypes = { Base = true } }`
 
-### Miten saan mysql-asyncin ja locale järjestelmän toimimaan omassa scriptissä:
- <h5>MySQL</h5>
-  1. MYSQL: Lisää `'@mysql-async/lib/MySQL.lua'` omaan \_\_resource.lua tiedostoon server sideen ensinmäiseksi
- <h5>Locale</h5>
-  2. Locale: Lisää `'@Spectrum_Core\locale.lua'` omaan \_\_resource.lua tiedostoon server ja/tai client sideen ennen `fi.lua (tai joku muu kieli)` tiedostoja
-  3. Lisää `config.lua` tiedostoon `Settings.Locale = 'fi' (tai joku muu kieli)`
+### Miten saan mysql-asyncin toimimaan omassa scriptissä 
+ 1. MYSQL: Lisää `'@mysql-async/lib/MySQL.lua'` omaan \_\_resource.lua tiedostoon server sideen ensinmäiseksi
+ 
+### Miten saan locale järjestelmän toimimaan omassa scriptissä:
+ 1. Locale: Lisää `'@Spectrum_Core\locale.lua'` omaan \_\_resource.lua tiedostoon server ja/tai client sideen ennen `fi.lua (tai joku muu kieli)` tiedostoja
+ 2. Lisää `config.lua` tiedostoon `Settings.Locale = 'fi' (tai joku muu kieli)`
  
