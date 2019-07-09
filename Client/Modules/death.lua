@@ -1,3 +1,6 @@
+SFW = SFW or {}
+
+--Death module. Handles player dead events
 RegisterCommand('die', function()
     local playerPed = PlayerPedId()
 
@@ -6,15 +9,16 @@ end)
 
 RegisterCommand('revive', function()
 	local playerPed = PlayerPedId() 
-	local coords = GetEntityCoords(playerPed)
+	local coords    = GetEntityCoords(playerPed)
+	local heading   = GetEntityHeading(playerPed)
 
 	local fomatedCoords = {
-		x = math.floor(coords.x*100)/100, 
-		y = math.floor(coords.y*100)/100,
-		z = math.floor(coords.z*100)/100,
+		x = SFW.Math.FormatCoords(coords.x, 2), -- 2 Decimals
+		y = SFW.Math.FormatCoords(coords.x, 2),
+		z = SFW.Math.FormatCoords(coords.x, 2),
 	}
 
-	spawnPed(playerPed, fomatedCoords, 0.0)
+	spawnPed(playerPed, fomatedCoords, heading)
 end)
 
 function spawnPed(ped, coords, heading)

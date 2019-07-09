@@ -1,10 +1,6 @@
-local firstSpawn = true
 -- Spawns player into server. Saves user
 AddEventHandler('playerSpawned', function()
-    if firstSpawn then
-        TriggerServerEvent('frbs:createPlayer')
-        firstSpawn = false
-    end
+    --Handler for player spawning
 end)
 
 AddEventHandler('onClientMapStart', function()
@@ -13,4 +9,9 @@ AddEventHandler('onClientMapStart', function()
 	--Citizen.Wait(2500)
 	exports.spawnmanager:setAutoSpawn(false)
     Citizen.Trace('Autospawn stopped')
+
+    --Should delete emergency vehicles
+    for a = 1, 15 do
+        EnableDispatchService(a, false)
+    end
 end)

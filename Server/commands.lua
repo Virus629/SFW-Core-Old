@@ -1,3 +1,4 @@
+--Server side commands
 RegisterCommand('cls', function(source)
     TriggerClientEvent('chat:clear', source)
 end)
