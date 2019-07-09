@@ -14,8 +14,8 @@ RegisterCommand('revive', function()
 
 	local fomatedCoords = {
 		x = SFW.Math.FormatCoords(coords.x, 2), -- 2 Decimals
-		y = SFW.Math.FormatCoords(coords.x, 2),
-		z = SFW.Math.FormatCoords(coords.x, 2),
+		y = SFW.Math.FormatCoords(coords.y, 2),
+		z = SFW.Math.FormatCoords(coords.z, 2)
 	}
 
 	spawnPed(playerPed, fomatedCoords, heading)
