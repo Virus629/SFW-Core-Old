@@ -3,6 +3,21 @@ SFW = SFW or {}
 
 local coordsVisible = false
 
+
+SFW.DrawScreenText = function(text, positionX, positionY, colorR, colorG, colorB, colorA, scaleX, scaleY)
+	SetTextColour(colorR, colorG, colorB, colorA)
+	SetTextFont(7)
+	SetTextScale(scaleX, scaleY)
+	SetTextWrap(0.0, 1.0)
+	SetTextCentre(false)
+	SetTextDropshadow(0, 0, 0, 0, 255)
+	SetTextEdge(1, 0, 0, 0, 205)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(positionX, positionY)
+end
+
+
 DrawScreenText = function(text)
 	SetTextColour(186, 186, 186, 255)
 	SetTextFont(7)
@@ -27,7 +42,7 @@ Citizen.CreateThread(function()
 			local playerX, playerY, playerZ = table.unpack(GetEntityCoords(playerPed))
 			local playerH = GetEntityHeading(playerPed)
 
-			DrawScreenText(("~r~X~w~: %s \n~r~Y~w~: %s \n~r~Z~w~: %s \n~r~H~w~: %s~w~"):format(SFW.Math.FormatCoord(playerX, 1), SFW.Math.FormatCoord(playerY, 1), SFW.Math.FormatCoord(playerZ, 1), SFW.Math.FormatCoord(playerH, 1)))
+			DrawScreenText(("~r~X~w~: %s \n~r~Y~w~: %s \n~r~Z~w~: %s \n~r~H~w~: %s~w~"):format(SFW.Math.FormatCoords(playerX, 1), SFW.Math.FormatCoords(playerY, 1), SFW.Math.FormatCoords(playerZ, 1), SFW.Math.FormatCoords(playerH, 1)))
 		end
 
 		Citizen.Wait(sleepThread)
@@ -39,7 +54,7 @@ ToggleCoords = function()
 end
 
 RegisterCommand("coords", function()
-    if settings.useDebug then
+    if Setting.EnableDebug then
         ToggleCoords()
     else
         print('Debug is false')

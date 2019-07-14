@@ -12,6 +12,7 @@ client_scripts {
     'locale.lua',
     'locales/fi.lua',
     
+    'client/common.lua',
     'client/utils.lua',
     'client/Modules/death.lua',
     'client/main.lua',
@@ -27,6 +28,7 @@ server_scripts {
     'locale.lua',
     'locales/fi.lua',
 
+    'server/common.lua',
     'server/functions.lua',
     'server/commands.lua',
     'server/main.lua',

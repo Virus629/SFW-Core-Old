@@ -1,8 +1,3 @@
--- Spawns player into server. Saves user
-AddEventHandler('playerSpawned', function()
-    --Handler for player spawning
-end)
-
 AddEventHandler('onClientMapStart', function()
 	Citizen.Trace('Trying to stop autospawn...')
 	exports.spawnmanager:spawnPlayer() -- Ensure player spawns into server.
