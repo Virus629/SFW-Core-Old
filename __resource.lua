@@ -16,6 +16,7 @@ client_scripts {
     'client/utils.lua',
     'client/Modules/death.lua',
     'client/main.lua',
+    'client/voicechat.lua',
 
     'shared/math.lua'
 }
@@ -29,9 +30,15 @@ server_scripts {
     'locales/fi.lua',
 
     'server/common.lua',
+    'server/Player/Classes/player.lua',
+    'server/Player/player.lua',
     'server/functions.lua',
     'server/commands.lua',
     'server/main.lua',
 
     'shared/math.lua'
+}
+
+server_exports {
+    --'GetPlayerData',
 }

@@ -13,13 +13,15 @@ RegisterCommand('revive', function()
 	local heading   = GetEntityHeading(playerPed)
 
 	local fomatedCoords = {
-		x = SFW.Math.FormatCoords(coords.x, 2), -- 2 Decimals
-		y = SFW.Math.FormatCoords(coords.y, 2),
-		z = SFW.Math.FormatCoords(coords.z, 2)
+		x = SFW.Math.Round(coords.x, 2), -- 2 Decimals
+		y = SFW.Math.Round(coords.y, 2),
+		z = SFW.Math.Round(coords.z, 2)
 	}
 
 	spawnPed(playerPed, fomatedCoords, heading)
 end)
+
+TriggerEvent('chat:addSuggestion', '/revive', 'Herätä itsesi henkiin')
 
 function spawnPed(ped, coords, heading)
 	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)

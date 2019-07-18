@@ -1,10 +1,10 @@
 --3d Text etc.
 SFW = SFW or {}
+SFW.Util = {}
 
 local coordsVisible = false
 
-
-SFW.DrawScreenText = function(text, positionX, positionY, colorR, colorG, colorB, colorA, scaleX, scaleY)
+SFW.Util.DrawScreenText = function(text, positionX, positionY, colorR, colorG, colorB, colorA, scaleX, scaleY)
 	SetTextColour(colorR, colorG, colorB, colorA)
 	SetTextFont(7)
 	SetTextScale(scaleX, scaleY)
@@ -17,35 +17,38 @@ SFW.DrawScreenText = function(text, positionX, positionY, colorR, colorG, colorB
 	DrawText(positionX, positionY)
 end
 
-
-DrawScreenText = function(text)
-	SetTextColour(186, 186, 186, 255)
-	SetTextFont(7)
-	SetTextScale(0.378, 0.378)
-	SetTextWrap(0.0, 1.0)
-	SetTextCentre(false)
-	SetTextDropshadow(0, 0, 0, 0, 255)
-	SetTextEdge(1, 0, 0, 0, 205)
-	SetTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawText(0.95, 0.91)
+SFW.Util.ShowHelpNotif = function(msg)
+	BeginTextCommandDisplayHelp('STRING')
+	AddTextComponentSubstringPlayerName(msg)
+	EndTextCommandDisplayHelp(0, false, true, -1)
 end
 
+--Give weapon
+RegisterCommand('giveweapon', function(source, args, rawCommand)
+	local ped = PlayerPedId()
+	local weapon = string.upper(args[1])
+
+	GiveWeaponToPed(ped, weapon, 2000, false, true)
+	exports['notif']:DoLongHudText('inform', 'Sinä sait aseen ' .. tostring(weapon) .. ' ja siinä on täydet ammukset')
+end)
+
+
+--Shows Coords on screen
 Citizen.CreateThread(function()
     while true do
-		local sleepThread = 250
+		local wait = 250
 		
 		if coordsVisible then
-			sleepThread = 5
+			wait = 5
 
 			local playerPed = PlayerPedId()
 			local playerX, playerY, playerZ = table.unpack(GetEntityCoords(playerPed))
 			local playerH = GetEntityHeading(playerPed)
 
-			DrawScreenText(("~r~X~w~: %s \n~r~Y~w~: %s \n~r~Z~w~: %s \n~r~H~w~: %s~w~"):format(SFW.Math.FormatCoords(playerX, 1), SFW.Math.FormatCoords(playerY, 1), SFW.Math.FormatCoords(playerZ, 1), SFW.Math.FormatCoords(playerH, 1)))
+			SFW.Util.DrawScreenText(("~r~X~w~: %s ~r~Y~w~: %s ~r~Z~w~: %s ~r~H~w~: %s~w~"):format(SFW.Math.Round(playerX, 1), SFW.Math.Round(playerY, 1), SFW.Math.Round(playerZ, 1), SFW.Math.Round(playerH, 1)), 0.5, 0.96, 186, 186, 186, 255, 0.378, 0.378)
 		end
 
-		Citizen.Wait(sleepThread)
+		Citizen.Wait(wait)
 	end
 end)
 
@@ -53,10 +56,11 @@ ToggleCoords = function()
 	coordsVisible = not coordsVisible
 end
 
-RegisterCommand("coords", function()
+RegisterCommand("coords", function(source, args, rawCommand)
     if Setting.EnableDebug then
-        ToggleCoords()
+		ToggleCoords()
     else
         print('Debug is false')
     end
 end)
+---

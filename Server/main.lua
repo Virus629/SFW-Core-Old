@@ -19,27 +19,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(60000 * 10)
     end
 end)
---
+--Global variables
 local x, y, z = nil
-
---Save user info :3
---First spawn save
-RegisterServerEvent('sfw:createPlayer')
-AddEventHandler('sfw:createPlayer', function()
-    local src        = source
-    local steamID    = GetPlayerIdentifiers(src)[1] --Taken from esx
-    local license    = GetPlayerIdentifiers(src)[2]
-    local playerName = GetPlayerName(src)
-
-    MySQL.Async.execute('INSERT INTO users (`id`, `license`, `username`) VALUES (@id, @license, @username) ON DUPLICATE KEY UPDATE `id` = @id',
-    {
-        ['@id'] = steamID,
-        ['@license'] = license,
-        ['@username'] = playerName
-    }, function(rowsChanged)
-        SFW.Debug('Player Saved')
-    end)
-end)
 
 --save User
 RegisterServerEvent('sfw:saveLastPos')
@@ -54,18 +35,8 @@ AddEventHandler('sfw:saveLastPos', function(lastPos)
     })
 end)
 
-
-RegisterServerEvent('sfw:savePlayer')
-AddEventHandler('sfw:savePlayer', function(source)
-    local src      = source
-    local steamID  = GetPlayerIdentifiers(src)[1] --Taken from esx
-
-    TriggerClientEvent('sfw:savePos', src)
-end)
-
----LATAA PELAAJAN
-RegisterServerEvent('sfw:loadPlayer')
-AddEventHandler('sfw:loadPlayer', function(src)
+RegisterServerEvent('sfw:loadPlayerPos')
+AddEventHandler('sfw:loadPlayerPos', function(src)
     local src     = source
     local steamID = GetPlayerIdentifiers(src)[1] --Taken from esx
 
@@ -84,22 +55,22 @@ AddEventHandler('sfw:loadPlayer', function(src)
     end
 end)
 
--- RegisterCommand('load', function(source, args, rawCommand)
---     TriggerEvent('sfw:loadPlayer')
--- end)
-
 --Voidaan käyttää pelaajan leftatessa johonkin esim. datan tallentamiseen
 AddEventHandler('playerDropped', function(reason)
     local src = source
-    local id  = GetPlayerName(src)
+    local steamID  = GetPlayerIdentifiers(src)[1]
+    local name  = GetPlayerName(src)
 
-    SFW.Debug('Player '.. id ..' has '.. reason)
-    TriggerEvent('sfw:savePlayer', src)
+    SFW.Debug('Player '.. name ..' has '.. reason)
 end)
 
 --Voidaan käyttää pelaajan lataamiseen yms.
 AddEventHandler('playerConnecting', function(playerName, setKickReason)
     local src = source
+    local steamID  = GetPlayerIdentifiers(src)[1]
 
     SFW.Debug('Player '.. playerName ..' is connecting')
+    createUser(getPlayerID(src))
+
+    SFW.Debug('Source: '.. getPlayerID(src))
 end)
