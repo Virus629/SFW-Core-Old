@@ -1,5 +1,9 @@
 <h1>Custom Framework For Fivem</h1>
 
+<b>DEVELOPING IS DISCONTINUED</b>
+
+---
+ 
 ### TODO:
 - [X] Dataa menee databaseen
 - [X] Käännös järjestelmä i18n?
